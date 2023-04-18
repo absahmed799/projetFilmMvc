@@ -1,0 +1,16 @@
+<section>
+  <h1>{{ titre|upper }}</h1>
+  
+  <form method="POST" action="admin?entite=salle&action=m&salle_numero={{  salle.salle_numero }}">
+
+    <label>Nombre de places</label>
+    <input name="salle_nb_places" value="{{ salle.salle_nb_places }}">
+    <span>&nbsp;{{ erreurs.salle_nb_places }}</span>
+
+    <input type="hidden" name="salle_numero" value="{{ salle.salle_numero }}">
+
+    <input type="submit" value="Envoyer">
+
+  </form>
+
+</section>

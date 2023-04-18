@@ -1,0 +1,18 @@
+<section>
+  <h1>{{ titre|upper }}</h1>
+  
+  <form method="POST" action="admin?entite=genre&action=a">
+
+    <label>Numéro</label>
+    <input name="genre_id" value="{{ genre.genre_id }}">
+    <span>&nbsp;{{ erreurs.genre_id }}</span>
+
+    <label>Nom</label>
+    <input name="genre_nom" value="{{ genre.genre_nom }}">
+    <span>&nbsp;{{ erreurs.genre_nom }}</span>
+
+    <input type="submit" value="Envoyer">
+
+</form>
+  </div>
+</section>

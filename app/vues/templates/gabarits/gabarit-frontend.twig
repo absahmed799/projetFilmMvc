@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>{{ titre }}</title>
+  <link rel="stylesheet" type="text/css" href="css/frontend.css?v=1.2">
+  <link href="https://fonts.googleapis.com/css2?family=Sansita+Swashed&display=swap" rel="stylesheet">
+  <script type="module" src="js/connexionDeconnexion.js"></script>
+  <script type="module" src="js/creerCompte.js"></script>
+</head>
+
+<body>
+  <header>
+    <nav>
+      <div id="logo">Le Méliès</div>
+      <ul>
+        <li><a href=".">À l'affiche</a></li>
+        <li><a href="prochainement">Prochainement</a></li>
+      </ul>
+    </nav>
+    <div>
+      <span id="utilisateur">{{ oUtilConn.utilisateur_prenom }} {{ oUtilConn.utilisateur_nom }}</span>
+      <span id="connecter"   class="{{     oUtilConn ? 'cache' : '' }}">Connecter</span>
+      <span id="creerCompte" class="{{     oUtilConn ? 'cache' : '' }}">Créer un compte</span>
+      <span id="deconnecter" class="{{ not oUtilConn ? 'cache' : '' }}">Déconnecter</span>
+    </div>
+  </header>
+  <main>
+
+  {{ include(templateMain) }}
+
+  </main>
+
+  {{ include("frontend/modaleConnexion.twig") }}
+  {{ include("frontend/modaleCreerCompte.twig") }}
+
+</body>
+</html>

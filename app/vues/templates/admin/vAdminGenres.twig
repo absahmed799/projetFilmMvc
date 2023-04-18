@@ -1,0 +1,33 @@
+<script>history.pushState({}, '', 'admin?entite=genre')</script>
+<script type="module" src="js/filtrer.js"></script>
+<section>
+  <h1>{{ titre|upper }}</h1>
+  <input id="filtrer" data-filtre="filtreGenres" value="" placeholder="Filtrage des lignes contenant cette chaîne">
+  {% if oUtilConn.utilisateur_profil in [constant('Utilisateur::PROFIL_ADMINISTRATEUR'),
+                                         constant('Utilisateur::PROFIL_EDITEUR')] %}
+  <a href="admin?entite=genre&action=a">Ajouter un genre</a>
+  {% endif %}
+  <p class="messageRetourAction {{ classRetour }}">{{ messageRetourAction }}&nbsp;</p>   
+  <div class="g genres">
+    <div class="t">Id      <img src="images/i-asc.svg"><img src="images/i-desc-a.svg"></div>
+    <div class="t">Nom     <img src="images/i-asc.svg"><img src="images/i-desc.svg"></div>
+    <div class="t">Nb Films<img src="images/i-asc.svg"><img src="images/i-desc.svg"></div>
+    <div class="t">Actions</div>
+  {% for genre in genres %}
+    <div class="l">
+      <div class="c dr">{{ genre.genre_id }}</div>
+      <div class="c   ">{{ genre.genre_nom }}</div>
+      <div class="c dr">{{ genre.nb_films }}</div>
+      <div class="c   ">
+        <a href="admin?entite=genre&action=m&genre_id={{ genre.genre_id }}">modifier</a>
+        {% if not genre.nb_films
+              and oUtilConn.utilisateur_profil in [constant('Utilisateur::PROFIL_ADMINISTRATEUR'),
+                                                   constant('Utilisateur::PROFIL_EDITEUR')] %}
+        <span class="confirmer" data-href="admin?entite=genre&action=s&genre_id={{ genre.genre_id }}">supprimer</span>
+        {% endif %}
+      </div>
+    </div>
+  {% endfor %} 
+  </div>
+</section>
+{{ include("admin/modaleSuppression.twig") }}

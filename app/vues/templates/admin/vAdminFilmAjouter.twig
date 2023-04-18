@@ -1,0 +1,49 @@
+<section>
+  <h1>{{ titre|upper }}</h1>
+  
+  <form method="POST" action="admin?entite=film&action=a" enctype="multipart/form-data">
+
+    <label>Titre</label>
+    <input name="film_titre" value="{{ film.film_titre }}">
+    <span>&nbsp;{{ erreurs.film_titre }}</span>
+
+    <label>Année de sortie</label>
+    <input name="film_annee_sortie" type="number" value="{{ film.film_annee_sortie | default('now' | date('Y')) }}"
+           min="{{ constant('Film::ANNEE_PREMIER_FILM') }}" max="{{ 'now' | date('Y') }}">
+    <span>&nbsp;{{ erreurs.film_annee_sortie }}</span>
+
+    <label>Durée (minutes)</label>
+    <input name="film_duree" type="number" value="{{ film.film_duree }}"
+           min="{{ constant('Film::DUREE_MIN') }}" max="{{ constant('Film::DUREE_MAX') }}">
+    <span>&nbsp;{{ erreurs.film_duree }}</span>
+
+    <label>Genre</label>
+    <select name="film_genre_id">
+      <option value="">Sélectionnez un genre</option>
+      {% for genre in genres %}
+      <option value="{{ genre.genre_id }}" {{ film.film_genre_id == genre.genre_id ? 'selected' : '' }}>{{ genre.genre_nom }}</option>
+      {% endfor %}
+    </select>
+    <span>&nbsp;{{ erreurs.film_genre_id }}</span>
+
+    <label>Résumé</label>
+    <textarea name="film_resume" rows="3">{{ film.film_resume }}</textarea>
+    <span>&nbsp;{{ erreurs.film_resume }}</span>
+
+    <label>Statut</label>
+    <select name="film_statut">
+      <option value="{{ constant('Film::STATUT_INVISIBLE') }}" {{ film.film_statut == constant('Film::STATUT_INVISIBLE') ? 'selected' : '' }}>Invisible</option>
+      <option value="{{ constant('Film::STATUT_VISIBLE') }}"   {{ film.film_statut == constant('Film::STATUT_VISIBLE')   ? 'selected' : '' }}>Visible  </option>
+      <option value="{{ constant('Film::STATUT_ARCHIVE') }}"   {{ film.film_statut == constant('Film::STATUT_ARCHIVE')   ? 'selected' : '' }}>Archivé  </option>
+    </select>
+    <span>&nbsp;{{ erreurs.film_statut }}</span>
+
+  
+    <label>Affiche au format jpg</label>
+    <input name="film_affiche" type="file">
+    <span>&nbsp;{{ erreurs.film_affiche }}</span>
+    
+    <input type="submit" value="Envoyer">
+</form>
+  </div>
+</section>

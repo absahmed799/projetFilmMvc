@@ -1,0 +1,35 @@
+<script>history.pushState({}, '', 'admin?entite=seance')</script>
+<script type="module" src="js/filtrer.js"></script>
+<section>
+  <h1>{{ titre|upper }}</h1>
+  <input id="filtrer" data-filtre="filtreSeances" value="" placeholder="Filtrage des lignes contenant cette chaîne">
+  {% if oUtilConn.utilisateur_profil in [constant('Utilisateur::PROFIL_ADMINISTRATEUR'),
+                                         constant('Utilisateur::PROFIL_EDITEUR')] %}
+  <a href="admin?entite=seance&action=a">Ajouter une séance</a>
+  {% endif %}
+  <p class="messageRetourAction {{ classRetour }}">{{ messageRetourAction }}&nbsp;</p>   
+  <div class="g seances">
+    <div class="t">Id Film     <img src="images/i-asc.svg"><img src="images/i-desc.svg"></div>
+    <div class="t">Titre Film  <img src="images/i-asc.svg"><img src="images/i-desc.svg"></div>
+    <div class="t">Salle       <img src="images/i-asc.svg"><img src="images/i-desc.svg"></div>
+    <div class="t">Date Heure  <img src="images/i-asc.svg"><img src="images/i-desc-a.svg"></div>
+    <div class="t">Actions</div>
+  {% for seance in seances %}
+    <div class="l">
+      <div class="c dr">{{ seance.seance_film_id }}</div>
+      <div class="c   ">{{ seance.film_titre }}</div>
+      <div class="c   ">salle {{ seance.seance_salle_numero }}</div>
+      <div class="c mi">{{ seance.seance_date }}&nbsp;&nbsp;{{ seance.seance_heure[:5] }}</div>
+      <div class="c   ">
+        <a href="admin?entite=seance&action=m&seance_film_id={{ seance.seance_film_id }}&seance_salle_numero={{ seance.seance_salle_numero }}&seance_date={{ seance.seance_date }}&seance_heure={{ seance.seance_heure }}">modifier</a>
+        {% if not seance.nb_seances
+              and oUtilConn.utilisateur_profil in [constant('Utilisateur::PROFIL_ADMINISTRATEUR'),
+                                                   constant('Utilisateur::PROFIL_EDITEUR')] %}
+        <span class="confirmer" data-href="admin?entite=seance&action=s&seance_film_id={{ seance.seance_film_id }}&seance_salle_numero={{ seance.seance_salle_numero }}&seance_date={{ seance.seance_date }}&seance_heure={{ seance.seance_heure }}">supprimer</span>
+        {% endif %}
+      </div>
+    </div>
+  {% endfor %} 
+  </div>
+</section>
+{{ include("admin/modaleSuppression.twig") }}

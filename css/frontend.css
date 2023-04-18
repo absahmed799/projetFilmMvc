@@ -1,0 +1,209 @@
+html, body, h1, h2, p, ul, li {
+  padding: 0;
+  margin: 0;
+  font-size: 16px;
+}
+
+body {
+  width: 90%;
+  min-width: 960px;
+  margin: 0 auto;
+  font-family: 'Trebuchet MS', sans-serif;
+  background-color: #2E292E;
+  color: #fff;
+}
+.cache {
+  display: none;
+}
+a {
+  text-decoration: none;
+  color: #98cece;
+}
+ul {
+  list-style: none; 
+}
+header {
+  display: flex;
+  justify-content:space-between;
+}
+header nav {
+  display: flex;
+}
+#logo {
+  padding: 0 20px;
+  line-height: 68px;
+  font-size: 48px;
+  font-family: 'Sansita Swashed', cursive;
+  color: #f9bc64;
+}
+header ul {
+  display: flex;
+}
+header a, header span {
+  margin: 20px 0 0 30px;
+  color: #98cece;
+  display:  inline-block;
+}
+#connecter, #creerCompte, #deconnecter {
+  cursor: pointer;
+}
+#utilisateur {
+  color: #fff;
+}
+main > section > h1 {
+  margin: 40px 0;
+  text-align: center;
+  font-size: 48px;
+  color: #f9bc64;
+}
+main > section > div {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+}
+section > div > div {
+  padding: 0 20px 40px 20px;
+}
+section > div img {
+  min-width: 200px;
+  max-width: 300px;
+  padding: 0 20px;
+}
+p.legende {
+  margin: 5px 0;
+  text-align: center;
+}
+div.info {
+  width: 450px;
+}
+div.info p {
+  margin: 0 0 16px 0;
+  line-height: 1.5;
+}
+div.info li {
+  line-height: 1.5; 
+}
+div.info li span {
+  display: inline-block;
+  padding-top: 10px; 
+}
+div.info li span:first-of-type {
+  width: 100px;
+  text-align: right;
+}
+div.info li span:last-of-type {
+  padding-left: 10px;
+  vertical-align: top;
+}
+div.ba {
+  width: 384px;
+}
+div.ba video {
+  margin-bottom: 30px;
+  width: 100%;
+}
+div.ba h2 {
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 36px;
+  font-weight:normal;
+  color: #d65b5a;
+}
+#horaires {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content:space-between;
+  background-color:#3E393E;
+}
+#horaires .jour {
+  box-sizing: border-box;
+  padding: 10px 20px 10px 10px;
+  line-height: 24px;
+  width: 130px;
+  color:#f9bc64; 
+}
+#horaires .heures {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: end;
+  row-gap: 8px; 
+  box-sizing: border-box;
+  padding: 10px 10px 10px 0;
+  width: calc(100% - 130px);
+}
+#horaires .heures div {
+  margin-left: 8px;
+  padding: 0 5px;
+  line-height: 24px;
+  color: #444;
+  background-color: #98cece;
+}
+
+/* formulaires 
+   =========== */
+
+  label, input, select {
+  display: block;
+  box-sizing: border-box;
+  margin-bottom: 5px;
+}
+label {
+  margin-top: 30px;
+}
+input, select, button {
+  padding: 8px;
+  width: 400px;
+  font-size: 16px;
+}
+form span {
+  display: block;
+  width: 500px;
+  color: brown;
+}
+input[type=submit] {
+  margin-top: 40px;
+  margin-bottom: 80px;
+}
+
+/* fenêtres modales 
+   ================ */
+
+dialog {
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 0 8px #777;
+}
+dialog::backdrop {
+  background: rgba(255, 255, 255, 0.8);
+}
+#modaleConnexion section, #modaleCreerCompte section {
+  padding: 0 20px;
+}
+#modaleConnexion h1, #modaleCreerCompte h1 {
+  margin: 20px 0 0 0;
+  text-align: center;
+  font-size: 24px;
+  color: #777;
+}
+#modaleConnexion span, #modaleCreerCompte span {
+  width: 400px;
+}
+#modaleConnexion span {
+  text-align: center;
+}
+#modaleCreerCompte .avecOeil {
+  display: flex;
+}
+#modaleCreerCompte .oeil, #modaleCreerCompte .oeilbarre {
+  margin-left: 10px;
+  width: 35px;
+  height: 35px;
+}
+#modaleCreerCompte .oeil {
+  background-image: url(data:image/svg+xml;base64,PHN2ZyBzdHlsZT0iZmlsbDojNjY2NjY2IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGFyaWEtaGlkZGVuPSJ0cnVlIiBmb2N1c2FibGU9ImZhbHNlIiB2aWV3Qm94PSIwIDAgMzIgMzIiPgogICAgICAgICAgICAgICAgICAgIDxwYXRoCiAgICAgICAgICAgICAgICAgICAgICAgIGQ9Ik0yNy44IDE1LjFjLTQuMS01LTguNC03LjQtMTIuNy03LjFDOC41IDguNCA0LjMgMTQuOSA0LjIgMTUuMiA0IDE1LjUgNCAxNiA0LjIgMTYuMyA3LjkgMjEuNCAxMS45IDI0IDE2IDI0aDAuNGM2LjgtMC4zIDExLjItNy40IDExLjQtNy43QzI4LjEgMTUuOSAyOCAxNS40IDI3LjggMTUuMXpNMTYuNCAyMmMtMy40IDAuMi02LjgtMi0xMC4xLTYuMyAxLjEtMS41IDQuNC01LjQgOS01LjcgMy41LTAuMiA3IDEuNyAxMC42IDUuOEMyNC42IDE3LjQgMjEgMjEuOCAxNi40IDIyeiIgLz4KICAgICAgICAgICAgICAgICAgICA8cGF0aAogICAgICAgICAgICAgICAgICAgICAgICBkPSJNMTYgMTEuNWMtMi41IDAtNC41IDItNC41IDQuNXMyIDQuNSA0LjUgNC41IDQuNS0yIDQuNS00LjVsMCAwQzIwLjUgMTMuNSAxOC41IDExLjUgMTYgMTEuNXpNMTYgMTguNWMtMS40IDAtMi41LTEuMS0yLjUtMi41czEuMS0yLjUgMi41LTIuNSAyLjUgMS4xIDIuNSAyLjVTMTcuNCAxOC41IDE2IDE4LjVMMTYgMTguNXoiIC8+CiAgICAgICAgICAgICAgICA8L3N2Zz4=);
+}  
+#modaleCreerCompte .oeilbarre {
+  background-image: url(data:image/svg+xml;base64,PHN2ZyBzdHlsZT0iZmlsbDojNjY2NjY2IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGFyaWEtaGlkZGVuPSJ0cnVlIiBmb2N1c2FibGU9ImZhbHNlIiB2aWV3Qm94PSIwIDAgMzIgMzIiPgogICAgICAgICAgICAgICAgICAgIDxwYXRoIGNsYXNzPSJhdXRoLWJhcnJlLW9laWwiCiAgICAgICAgICAgICAgICAgICAgICAgIGQ9Ik0yMi45IDEwLjVsNC44LTQuOGMwLjQtMC40IDAuNC0xIDAtMS40IC0wLjQtMC40LTEtMC40LTEuNCAwIC0xLjcgMS43LTMuNCAzLjQtNS4xIDUuMSAtNCA0LTguMSA4LTEyLjEgMTIgLTEuNiAxLjYtMy4yIDMuMi00LjggNC44IC0wLjQgMC40LTAuNCAxIDAgMS40czEgMC40IDEuNCAwbDUuMS01LjFNMTIuMiAxOC40TDEwLjYgMjBNMTkuNyAxMC45bC0xLjMgMS4zTTE1IDE4LjNsMy4yLTMuMk0xNyAxMy43bC0zLjIgMy4yIiAvPgogICAgICAgICAgICAgICAgICAgIDxwYXRoCiAgICAgICAgICAgICAgICAgICAgICAgIGQ9Ik0yNy44IDE1LjFjLTQuMS01LTguNC03LjQtMTIuNy03LjFDOC41IDguNCA0LjMgMTQuOSA0LjIgMTUuMiA0IDE1LjUgNCAxNiA0LjIgMTYuMyA3LjkgMjEuNCAxMS45IDI0IDE2IDI0aDAuNGM2LjgtMC4zIDExLjItNy40IDExLjQtNy43QzI4LjEgMTUuOSAyOCAxNS40IDI3LjggMTUuMXpNMTYuNCAyMmMtMy40IDAuMi02LjgtMi0xMC4xLTYuMyAxLjEtMS41IDQuNC01LjQgOS01LjcgMy41LTAuMiA3IDEuNyAxMC42IDUuOEMyNC42IDE3LjQgMjEgMjEuOCAxNi40IDIyeiIgLz4KICAgICAgICAgICAgICAgICAgICA8cGF0aAogICAgICAgICAgICAgICAgICAgICAgICBkPSJNMTYgMTEuNWMtMi41IDAtNC41IDItNC41IDQuNXMyIDQuNSA0LjUgNC41IDQuNS0yIDQuNS00LjVsMCAwQzIwLjUgMTMuNSAxOC41IDExLjUgMTYgMTEuNXpNMTYgMTguNWMtMS40IDAtMi41LTEuMS0yLjUtMi41czEuMS0yLjUgMi41LTIuNSAyLjUgMS4xIDIuNSAyLjVTMTcuNCAxOC41IDE2IDE4LjVMMTYgMTguNXoiIC8+CiAgICAgICAgICAgICAgICA8L3N2Zz4=);
+}

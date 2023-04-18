@@ -1,0 +1,33 @@
+<script>history.pushState({}, '', 'admin?entite=pays')</script>
+<script type="module" src="js/filtrer.js"></script>
+<section>
+  <h1>{{ titre|upper }}</h1>
+  <input id="filtrer" data-filtre="filtrePays" value="" placeholder="Filtrage des lignes contenant cette chaîne">
+  {% if oUtilConn.utilisateur_profil in [constant('Utilisateur::PROFIL_ADMINISTRATEUR'),
+                                         constant('Utilisateur::PROFIL_EDITEUR')] %}
+  <a href="admin?entite=pays&action=a">Ajouter un pays</a>
+  {% endif %}
+  <p class="messageRetourAction {{ classRetour }}">{{ messageRetourAction }}&nbsp;</p>   
+  <div class="g pays">
+    <div class="t">Id      <img src="images/i-asc.svg"><img src="images/i-desc-a.svg"></div>
+    <div class="t">Nom     <img src="images/i-asc.svg"><img src="images/i-desc.svg"></div>
+    <div class="t">Nb Films<img src="images/i-asc.svg"><img src="images/i-desc.svg"></div>
+    <div class="t">Actions</div>
+  {% for unPays in pays %}
+    <div class="l">
+      <div class="c dr">{{ unPays.pays_id }}</div>
+      <div class="c   ">{{ unPays.pays_nom }}</div>
+      <div class="c dr">{{ unPays.nb_films }}</div>
+      <div class="c   ">
+        <a href="admin?entite=pays&action=m&pays_id={{ unPays.pays_id }}">modifier</a>
+        {% if not unPays.nb_films
+              and oUtilConn.utilisateur_profil in [constant('Utilisateur::PROFIL_ADMINISTRATEUR'),
+                                                   constant('Utilisateur::PROFIL_EDITEUR')] %}
+        <span class="confirmer" data-href="admin?entite=pays&action=s&pays_id={{ unPays.pays_id }}">supprimer</span>
+        {% endif %}
+      </div>
+    </div>
+  {% endfor %} 
+  </div>
+</section>
+{{ include("admin/modaleSuppression.twig") }}

@@ -1,0 +1,33 @@
+<script>history.pushState({}, '', 'admin?entite=acteur')</script>
+<script type="module" src="js/filtrer.js"></script>
+<section>
+  <h1>{{ titre|upper }}</h1>
+  <input id="filtrer" data-filtre="filtreActeurs" value="" placeholder="Filtrage des lignes contenant cette chaîne">
+  {% if oUtilConn.utilisateur_profil in [constant('Utilisateur::PROFIL_ADMINISTRATEUR'),
+                                         constant('Utilisateur::PROFIL_EDITEUR')] %}
+  <a href="admin?entite=acteur&action=a">Ajouter un acteur</a>
+  {% endif %}
+  <p class="messageRetourAction {{ classRetour }}">{{ messageRetourAction }}&nbsp;</p>   
+  <div class="g acteurs">
+    <div class="t">Id         <img src="images/i-asc.svg"><img src="images/i-desc-a.svg"></div>
+    <div class="t">Nom, Prénom<img src="images/i-asc.svg"><img src="images/i-desc.svg"></div>
+    <div class="t">Nb Films   <img src="images/i-asc.svg"><img src="images/i-desc.svg"></div>
+    <div class="t">Actions</div>
+  {% for acteur in acteurs %}
+    <div class="l">
+      <div class="c dr">{{ acteur.acteur_id }}</div>
+      <div class="c   ">{{ acteur.acteur_nom }}, {{ acteur.acteur_prenom }}</div>
+      <div class="c dr">{{ acteur.nb_films }}</div>
+      <div class="c   ">
+        <a href="admin?entite=acteur&action=m&acteur_id={{ acteur.acteur_id }}">modifier</a>
+        {% if not acteur.nb_films
+              and oUtilConn.utilisateur_profil in [constant('Utilisateur::PROFIL_ADMINISTRATEUR'),
+                                                   constant('Utilisateur::PROFIL_EDITEUR')] %}
+        <span class="confirmer" data-href="admin?entite=acteur&action=s&acteur_id={{ acteur.acteur_id }}">supprimer</span>
+        {% endif %}
+      </div>
+    </div>
+  {% endfor %} 
+  </div>
+</section>
+{{ include("admin/modaleSuppression.twig") }}

@@ -1,0 +1,33 @@
+<script>history.pushState({}, '', 'admin?entite=salle')</script>
+<script type="module" src="js/filtrer.js"></script>
+<section>
+  <h1>{{ titre|upper }}</h1>
+  <input id="filtrer" data-filtre="filtreSalles" value="" placeholder="Filtrage des lignes contenant cette chaîne">
+  {% if oUtilConn.utilisateur_profil in [constant('Utilisateur::PROFIL_ADMINISTRATEUR'),
+                                         constant('Utilisateur::PROFIL_EDITEUR')] %}
+  <a href="admin?entite=salle&action=a">Ajouter une salle</a>
+  {% endif %}
+  <p class="messageRetourAction {{ classRetour }}">{{ messageRetourAction }}&nbsp;</p>   
+  <div class="g salles">
+    <div class="t">Numéro   <img src="images/i-asc.svg"><img src="images/i-desc-a.svg"></div>
+    <div class="t">Nb Places<img src="images/i-asc.svg"><img src="images/i-desc.svg"></div>
+    <div class="t">Nb Séances<img src="images/i-asc.svg"><img src="images/i-desc.svg"></div>
+    <div class="t">Actions</div>
+  {% for salle in salles %}
+    <div class="l">
+      <div class="c dr">{{ salle.salle_numero }}</div>
+      <div class="c dr">{{ salle.salle_nb_places }}</div>
+      <div class="c dr">{{ salle.nb_seances }}</div>
+      <div class="c   ">
+        <a href="admin?entite=salle&action=m&salle_numero={{ salle.salle_numero }}">modifier</a>
+        {% if not salle.nb_seances
+              and oUtilConn.utilisateur_profil in [constant('Utilisateur::PROFIL_ADMINISTRATEUR'),
+                                                   constant('Utilisateur::PROFIL_EDITEUR')] %}
+        <span class="confirmer" data-href="admin?entite=salle&action=s&salle_numero={{ salle.salle_numero }}">supprimer</span>
+        {% endif %}
+      </div>
+    </div>
+  {% endfor %} 
+  </div>
+</section>
+{{ include("admin/modaleSuppression.twig") }}

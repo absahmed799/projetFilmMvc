@@ -1,0 +1,20 @@
+<section>
+  <h1>{{ titre|upper }}</h1>
+  
+  <form method="POST" action="admin?entite=realisateur&action=m&realisateur_id={{  realisateur.realisateur_id }}">
+
+    <label>Nom</label>
+    <input name="realisateur_nom" value="{{ realisateur.realisateur_nom }}">
+    <span>&nbsp;{{ erreurs.realisateur_nom }}</span>
+
+    <label>Prénom</label>
+    <input name="realisateur_prenom" value="{{ realisateur.realisateur_prenom }}">
+    <span>&nbsp;{{ erreurs.realisateur_prenom }}</span>
+
+    <input type="hidden" name="realisateur_id" value="{{ realisateur.realisateur_id }}">
+
+    <input type="submit" value="Envoyer">
+
+  </form>
+
+</section>

@@ -1,0 +1,16 @@
+<section>
+  <h1>{{ titre|upper }}</h1>
+  
+  <form method="POST" action="admin?entite=pays&action=m&pays_id={{  pays.pays_id }}">
+
+    <label>Nom</label>
+    <input name="pays_nom" value="{{ pays.pays_nom }}">
+    <span>&nbsp;{{ erreurs.pays_nom }}</span>
+
+    <input type="hidden" name="pays_id" value="{{ pays.pays_id }}">
+
+    <input type="submit" value="Envoyer">
+
+  </form>
+
+</section>

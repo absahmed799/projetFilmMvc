@@ -1,0 +1,50 @@
+<script>history.pushState({}, '', 'admin?entite=film')</script>
+<script type="module" src="js/filtrer.js"></script>
+<section>
+  <h1>{{ titre|upper }}</h1>
+  <input id="filtrer" data-filtre="filtreFilms" value="" placeholder="Filtrage des lignes contenant cette chaîne">
+  {% if oUtilConn.utilisateur_profil in [constant('Utilisateur::PROFIL_ADMINISTRATEUR'),
+                                         constant('Utilisateur::PROFIL_EDITEUR')] %}
+  <a href="admin?entite=film&action=a">Ajouter un film</a>
+  {% endif %}
+  <p class="messageRetourAction {{ classRetour }}">{{ messageRetourAction }}&nbsp;</p>   
+  <div class="g films">
+    <div class="t">Id      <img src="images/i-asc.svg"><img src="images/i-desc-a.svg"></div>
+    <div class="t">Titre   <img src="images/i-asc.svg"><img src="images/i-desc.svg"></div>
+    <div class="t">Sortie  <img src="images/i-asc.svg"><img src="images/i-desc.svg"></div>
+    <div class="t">Durée   <img src="images/i-asc.svg"><img src="images/i-desc.svg"></div>
+    <div class="t">Genre   <img src="images/i-asc.svg"><img src="images/i-desc.svg"></div>
+    <div class="t">Statut  <img src="images/i-asc.svg"><img src="images/i-desc.svg"></div>
+    <div class="t">Nb Real.<img src="images/i-asc.svg"><img src="images/i-desc.svg"></div>
+    <div class="t">Nb Act. <img src="images/i-asc.svg"><img src="images/i-desc.svg"></div>
+    <div class="t">Nb Pays <img src="images/i-asc.svg"><img src="images/i-desc.svg"></div>
+    <div class="t">Actions</div>
+  {% for film in films %}
+    <div class="l">
+      <div class="c dr">{{ film.film_id }}</div>
+      <div class="c   ">{{ film.film_titre }}</div>
+      <div class="c mi">{{ film.film_annee_sortie }}</div>
+      <div class="c dr">{{ film.film_duree }}</div>
+      <div class="c   ">{{ film.genre_nom }}</div>
+      <div class="c   ">
+        {% if     film.film_statut == constant('Film::STATUT_INVISIBLE') %} Invisible
+        {% elseif film.film_statut == constant('Film::STATUT_VISIBLE') %}   Visible
+        {% elseif film.film_statut == constant('Film::STATUT_ARCHIVE') %}   Archivé
+        {% endif %}
+      </div>
+      <div class="c dr">{{ film.nb_realisateurs }}</div>
+      <div class="c dr">{{ film.nb_acteurs }}</div>
+      <div class="c dr">{{ film.nb_pays }}</div>
+      <div class="c   ">
+        <a href="admin?entite=film&action=m&film_id={{ film.film_id }}">modifier</a>
+        {% if not film.nb_realisateurs and not film.nb_acteurs and not film.nb_pays 
+              and oUtilConn.utilisateur_profil in [constant('Utilisateur::PROFIL_ADMINISTRATEUR'),
+                                                   constant('Utilisateur::PROFIL_EDITEUR')] %}
+        <span class="confirmer" data-href="admin?entite=film&action=s&film_id={{ film.film_id }}">supprimer</span>
+        {% endif %}
+      </div>
+    </div>
+  {% endfor %} 
+  </div>
+</section>
+{{ include("admin/modaleSuppression.twig") }}

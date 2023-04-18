@@ -1,0 +1,18 @@
+<section>
+  <h1>{{ titre|upper }}</h1>
+  
+  <form method="POST" action="admin?entite=acteur&action=a">
+
+    <label>Nom</label>
+    <input name="acteur_nom" value="{{ acteur.acteur_nom }}">
+    <span>&nbsp;{{ erreurs.acteur_nom }}</span>
+
+    <label>Prénom</label>
+    <input name="acteur_prenom" value="{{ acteur.acteur_prenom }}">
+    <span>&nbsp;{{ erreurs.acteur_prenom }}</span>
+
+    <input type="submit" value="Envoyer">
+
+  </form>
+
+</section>

@@ -1,0 +1,57 @@
+<script type="module">
+  let eDialog = document.getElementById('modaleConnexion');
+  eDialog.addEventListener('cancel', (event) => { event.preventDefault();});
+  eDialog.showModal();
+  
+  document.querySelectorAll(".avecOeil span").forEach(eSpan => {
+    eSpan.onclick = function() {
+      let eInput = eSpan.previousElementSibling;
+      eInput.type = eInput.type == 'password' ? 'text' : 'password';
+      this.classList.toggle('oeil');
+      this.classList.toggle('oeilbarre');
+    };
+  });
+</script>
+
+<dialog id="modaleConnexion">
+  <section>
+    <h1>Connexion</h1>
+    
+    <form name="frmConnexion" method="POST" action="admin">
+
+    {% if renouvelerMdp == "non" %}    
+      <br><span id="messageErreurConnexion">&nbsp;{{ messageErreurConnexion }}</span>
+
+      <label>Courriel</label>
+      <input name="utilisateur_courriel" value="">
+
+      <label>Mot de passe</label>
+      <input type="password" name="utilisateur_mdp" value="">
+    
+    {% endif %}
+
+    {% if renouvelerMdp == "oui" %}
+
+      <label>Nouveau mot de passe</label>
+      <div class="avecOeil">
+        <input type="password" name="nouveau_mdp" value="{{ utilisateur.nouveau_mdp }}">
+        <span class="oeil"></span>
+      </div>  
+      <span>&nbsp;{{ erreurs.nouveau_mdp }}</span>
+
+      <label>Confirmez le nouveau mot de passe</label>
+      <div class="avecOeil">
+        <input type="password" name="nouveau_mdp_bis" value="{{ utilisateur.nouveau_mdp_bis }}">
+        <span class="oeil"></span>
+      </div>
+      <span>&nbsp;{{ erreurs.nouveau_mdp_bis }}</span>
+
+      <input type="hidden" name="utilisateur_id" value="{{ utilisateur.utilisateur_id }}">
+
+    {% endif %}
+
+      <input type="submit" value="Envoyer">
+
+    </form>
+  </section>
+</dialog>

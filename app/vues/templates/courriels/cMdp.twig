@@ -1,0 +1,34 @@
+<section>
+  <p style="line-height: 1.5; opacity: 0.9;">Bonjour {{ oUtilisateur.utilisateur_prenom }} {{ oUtilisateur.utilisateur_nom }},</p>
+
+  {% if oUtilisateur.utilisateur_profil in [constant('utilisateur::PROFIL_ADMINISTRATEUR'),
+                                            constant('utilisateur::PROFIL_EDITEUR'),
+                                            constant('utilisateur::PROFIL_CORRECTEUR')]  %}
+  <p style="line-height: 1.5; opacity: 0.9;">Nous avons le plaisir de vous transmettre votre identifiant de connexion et votre mot de passe pour accéder à l'administration de notre site Le Méliès.</p>
+  {% endif %}
+
+  {% if oUtilisateur.utilisateur_profil == constant('utilisateur::PROFIL_CLIENT')  %}
+  <p style="line-height: 1.5; opacity: 0.9;">Nous avons le plaisir de vous transmettre votre identifiant de connexion et votre mot de passe sur notre site Le Méliès.</p>
+  {% endif %}
+
+  <p style="line-height: 1.5; opacity: 0.9;">Identifiant: <strong style="color: #f9bc64;">{{ oUtilisateur.utilisateur_courriel }}</strong></p>
+  <p style="line-height: 1.5; opacity: 0.9;">Mot de passe: <strong style="color: #f9bc64;">{{ oUtilisateur.utilisateur_mdp }}</strong></p>
+
+  {% if oUtilisateur.utilisateur_profil in [constant('utilisateur::PROFIL_ADMINISTRATEUR'),
+                                            constant('utilisateur::PROFIL_EDITEUR'),
+                                            constant('utilisateur::PROFIL_CORRECTEUR')]  %}
+  <p style="line-height: 1.5; opacity: 0.9;">
+    <a style="  text-decoration: none; color: #98cece;"
+       href="http://{{ http_host }}{{ constant('Routeur::BASE_URI') }}admin">Cliquez sur ce lien pour accéder à notre interface d'administration</a>
+  </p>
+  {% else %}
+  <p style="line-height: 1.5; opacity: 0.9;">
+    <a style="  text-decoration: none; color: #98cece;"
+       href="http://{{ http_host }}{{ constant('Routeur::BASE_URI') }}connecter">Cliquez sur ce lien pour vous connecter à notre site</a>
+  </p>
+  {% endif %}
+
+  <p style="line-height: 1.5; opacity: 0.9;">Cordialement,</p>
+  <p style="line-height: 1.5; opacity: 0.9;">L'équipe du Méliès</p>
+  <div style="line-height: 54px; font-size: 28px; font-family: cursive; color: #f9bc64;">Le Méliès</div>
+</section>
